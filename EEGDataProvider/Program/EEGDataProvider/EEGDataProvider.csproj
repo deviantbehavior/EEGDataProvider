@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <StartupObject>EEGLog.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1403509808_63925.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FD958A6-1DFB-4DD7-81B3-4C19F9255662}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EEGLog</RootNamespace>
+    <AssemblyName>EEGLog</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PureMidi.CoreMmSystem">
+      <HintPath>..\Dependencies\PureMidi.CoreMmSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SerialHandler.cs" />
+    <Compile Include="ChannelPlotting\EEGChannelGraph.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChannelPlotting\EEGChannelPlots.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChannelHandling\EEGChannelBuffer.cs" />
+    <Compile Include="ChannelHandling\EEGChannels.cs" />
+    <Compile Include="EEGLogMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EEGLogMain.Designer.cs">
+      <DependentUpon>EEGLogMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MidiHandling\MidiHandler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MidiHandling\MidiHandler.Designer.cs">
+      <DependentUpon>MidiHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscHandling\OSCHandler.cs" />
+    <Compile Include="OscHandling\OSC\OSCBundle.cs" />
+    <Compile Include="OscHandling\OSC\OSCClient.cs" />
+    <Compile Include="OscHandling\OSC\OSCMessage.cs" />
+    <Compile Include="OscHandling\OSC\OSCPacket.cs" />
+    <Compile Include="OscHandling\OSC\OSCServer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="EEGLogMain.resx">
+      <DependentUpon>EEGLogMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MidiHandling\MidiHandler.resx">
+      <DependentUpon>MidiHandler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1403509808_63925.ico" />
+    <Content Include="thinkgear.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EEGCore\EEGCore.csproj">
+      <Project>{97e73331-1198-43fd-933f-847bc3f33344}</Project>
+      <Name>EEGCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphLib\GraphLib.csproj">
+      <Project>{0C0A1F4D-1363-4544-A7C5-196C76D26CCA}</Project>
+      <Name>GraphLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
